@@ -14,6 +14,9 @@ git clone --depth=1 -b dev https://github.com/vernesong/OpenClash
 # HelmiWrt packages
 git clone --depth=1 https://github.com/helmiau/helmiwrt-packages
 
+# Add qtools (Tools modems based on the Qualcomm chipset)
+svn co https://github.com/koshev-msk/modemfeed/trunk/packages/telephony/qtools koshev-msk/qtools
+
 # Add the default password for the 'root' user（Change the empty password to 'password'）
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
