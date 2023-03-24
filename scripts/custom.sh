@@ -11,14 +11,14 @@
 # Add official OpenClash source
 git clone --depth=1 -b dev https://github.com/vernesong/OpenClash
 
-# HelmiWrt packages
-git clone --depth=1 https://github.com/helmiau/helmiwrt-packages
-
 # Add qtools (Tools modems based on the Qualcomm chipset)
 svn co https://github.com/koshev-msk/modemfeed/trunk/packages/telephony/qtools koshev-msk/qtools
 
 # Add the default password for the 'root' user（Change the empty password to 'password'）
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
+
+# Set timezone
+sed -i -e "s/CST-8/WIB-7/g" -e "s/Shanghai/Jakarta/g" package/emortal/default-settings/files/99-default-settings-chinese
 
 # Add date version
 export DATE_VERSION=$(date -d "$(rdate -n -4 -p pool.ntp.org)" +'%Y-%m-%d')
@@ -29,10 +29,27 @@ pushd package/kernel/mt76
 sed -i '/mt7662u_rom_patch.bin/a\\techo mt76-usb disable_usb_sg=1 > $\(1\)\/etc\/modules.d\/mt76-usb' Makefile
 popd
 
-# Rename hostname to OpenWrt
+# Rename hostname OpenWrt
 pushd package/base-files/files/bin
 sed -i 's/ImmortalWrt/BashSupn-Wrt/g' config_generate
 popd
 
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
+
+# Add luci-app-tinyfilemanager
+# svn co https://github.com/lynxnexy/luci-app-tinyfilemanager/trunk package/luci-app-tinyfilemanager
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-tinyfm package/luci-app-tinyfm
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-libernet-plus package/luci-app-libernet-plus
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-libernet-bin package/luci-app-libernet-bin
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-mulimiter package/luci-app-mulimiter
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-myxllite package/luci-app-myxllite
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-netmon package/luci-app-netmon
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-openspeedtest package/luci-app-openspeedtest
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/badvpn package/badvpn
+svn co https://github.com/helmiau/helmiwrt-packages/trunk/corkscrew package/corkscrew
+
+rm -rf feeds/luci/applications/luci-app-filebrowser
+svn co https://github.com/happy902/luci-app-filebrowser/trunk package/luci-app-filebrowser
+
+
