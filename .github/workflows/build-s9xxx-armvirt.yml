@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/radityabh/amlogic-s9xxx-openwrt
   REPO_BRANCH: main
-  WRT_REL: https://github.com/Putra-0/BashSupn-WRT/releases/tag/armvirt-64
+  WRT_REL: https://github.com/Putra-0/BashSupn-WRT/releases/download/wrt
   WRT_FILENAME: immortalwrt-armvirt-64-default-rootfs.tar.gz
   UPLOAD_RELEASE: true
   TZ: Asia/Jakarta
