@@ -47,4 +47,10 @@ svn co https://github.com/helmiau/helmiwrt-packages/trunk/corkscrew package/cork
 rm -rf feeds/luci/applications/luci-app-filebrowser
 svn co https://github.com/happy902/luci-app-filebrowser/trunk package/luci-app-filebrowser
 
+rm -rf feeds/luci/applications/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
+pushd package/luci-app-openclash/tools/po2lmo
+make && sudo make install
+popd
+
 
