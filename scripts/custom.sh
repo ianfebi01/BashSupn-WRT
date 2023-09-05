@@ -37,6 +37,10 @@ popd
 # Change default shell to zsh
 sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' package/base-files/files/etc/passwd
 
+# Add Argon theme configuration
+git clone --depth=1 https://github.com/jerrykuku/luci-app-argon-config
+git clone --depth=1 https://github.com/jerrykuku/luci-theme-argon
+
 # Add luci-app-tinyfilemanager
 # svn co https://github.com/lynxnexy/luci-app-tinyfilemanager/trunk package/luci-app-tinyfilemanager
 svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-tinyfm package/luci-app-tinyfm
