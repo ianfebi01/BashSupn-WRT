@@ -30,7 +30,7 @@ env:
 
 jobs:
   Toolchain:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     outputs:
       OPENWRT_ROOT_PATH: ${{ steps.clone.outputs.OPENWRT_ROOT_PATH }}
@@ -57,7 +57,7 @@ jobs:
           mkdir -p workspace
 
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@v1
 
       - name: Clone Source Code
         id: clone
