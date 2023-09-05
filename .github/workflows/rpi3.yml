@@ -57,7 +57,7 @@ jobs:
           mkdir -p workspace
 
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@main
 
       - name: Clone Source Code
         id: clone
