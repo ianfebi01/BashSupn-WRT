@@ -71,11 +71,11 @@ jobs:
 
     - name: Load custom configuration
       run: |
-       [ -e files ] && mv files $OPENWRT_ROOT_PATH/files
-          [ -e $CONFIG_FILE ] && sudo mv $CONFIG_FILE $OPENWRT_ROOT_PATH/.config
-          cat config/universal.config >> $OPENWRT_ROOT_PATH/.config
-          cat config/rpi-extra.config >> $OPENWRT_ROOT_PATH/.config
-          cd $OPENWRT_ROOT_PATH
+       [ -e files ] && mv files openwrt/files
+          [ -e $CONFIG_FILE ] && sudo mv $CONFIG_FILE openwrt/.config
+          cat config/universal.config >> openwrt/.config
+          cat config/rpi-extra.config >> openwrt/.config
+          cd openwrt
           chmod +x $GITHUB_WORKSPACE/scripts/*.sh
           $GITHUB_WORKSPACE/$DIY_SH
           $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_BINARY_PLATFORM
