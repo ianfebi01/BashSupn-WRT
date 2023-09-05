@@ -25,7 +25,6 @@ env:
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/rpi/rpi3-target.config
   DIY_SH: scripts/custom.sh
-  TOOLCHAIN_TAG: toolchain
   CLASH_BINARY_PLATFORM: arm64
   SPEEDTEST_CLI_BINARY: aarch64
   UPLOAD_BIN_DIR: false
@@ -80,7 +79,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_SH
         $GITHUB_WORKSPACE/scripts/preset-clash-core.sh $CLASH_BINARY_PLATFORM
         $GITHUB_WORKSPACE/scripts/preset-terminal-tools.sh
-        $GITHUB_WORKSPACE/scripts/preset-speedtest-cli.sh $SPEEDTEST_CLI_BINARY
+        
         make defconfig
         
     - name: SSH connection to Actions
