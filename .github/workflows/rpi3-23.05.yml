@@ -91,7 +91,8 @@ jobs:
           git init
           git remote add origin https://github.com/$GITHUB_REPOSITORY
           git fetch
-          git checkout -t origin/$CURRENT_BRANCH
+          BRANCH_NAME=${CURRENT_BRANCH:-main}
+          git checkout -t origin/$BRANCH_NAME
 
       - name: Prepare Toolchain Image Form Releases
         if: env.TOOLCHAIN_RELEASE_UPLOAD == 'true'
