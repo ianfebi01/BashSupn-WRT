@@ -48,8 +48,8 @@ svn co https://github.com/helmiau/helmiwrt-packages/trunk/luci-app-tinyfm packag
 svn co https://github.com/helmiau/helmiwrt-packages/trunk/badvpn package/badvpn
 svn co https://github.com/helmiau/helmiwrt-packages/trunk/corkscrew package/corkscrew
 
-rm -rf feeds/luci/applications/luci-app-filebrowser
-svn co https://github.com/happy902/luci-app-filebrowser/trunk package/luci-app-filebrowser
+#rm -rf feeds/luci/applications/luci-app-filebrowser
+#svn co https://github.com/happy902/luci-app-filebrowser/trunk package/luci-app-filebrowser
 
 rm -rf feeds/luci/applications/luci-app-openclash
 svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash package/luci-app-openclash
