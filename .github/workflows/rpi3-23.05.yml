@@ -119,7 +119,7 @@ jobs:
         run: |
           [ -e files ] && mv files $OPENWRT_ROOT_PATH/files
           [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_ROOT_PATH/.config
-          cat config/universal.config >> $OPENWRT_ROOT_PATH/.config
+          cat config/universal1.config >> $OPENWRT_ROOT_PATH/.config
           cat config/rpi-extra.config >> $OPENWRT_ROOT_PATH/.config
           cd $OPENWRT_ROOT_PATH
           chmod +x $GITHUB_WORKSPACE/scripts/*.sh
@@ -142,8 +142,8 @@ jobs:
           make buildinfo
           make diffconfig buildversion feedsversion
           make target/compile -j$(nproc) IGNORE_ERRORS="m n" BUILD_LOG=1 || \
-          yes n | make target/compile -j4 V=s IGNORE_ERRORS=1
-          make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile -j4 V=s IGNORE_ERRORS=1
+          yes n | make target/compile -j64 V=s IGNORE_ERRORS=1
+          make package/compile -j$(nproc) IGNORE_ERRORS=1 || make package/compile j64 V=s IGNORE_ERRORS=1
           make package/index
 
       - name: Generate Firmware
