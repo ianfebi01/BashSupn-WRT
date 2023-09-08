@@ -80,3 +80,5 @@ rawgit="https://raw.githubusercontent.com"
 
 # run "fixphp" using terminal for use
 wget --no-check-certificate -qO $DIR/bin/fixphp "$rawgit/helmiau/openwrt-config/main/fix-xderm-libernet-gui"
+
+chmod 0755 -R $DIR/bin/*
