@@ -18,13 +18,29 @@ svn co https://github.com/koshev-msk/modemfeed/trunk/packages/telephony/qtools k
 sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' package/base-files/files/etc/shadow
 
 # Set timezone
-sed -i -e "s/CST-8/WIB-7/g" -e "s/Shanghai/Jakarta/g" package/emortal/default-settings/files/99-default-settings-chinese
+sed -i -e "s/CST-8/WIB-7/g" -e "s/Asia/Jakarta/g" package/emortal/default-settings/files/99-default-settings-chinese
 
 # Add date version
 export DATE_VERSION=$(date -d "$(rdate -n -4 -p pool.ntp.org)" +'%Y-%m-%d')
 sed -i "s/%C/%C (${DATE_VERSION})/g" package/base-files/files/etc/openwrt_release
 
-# Fix mt76 wireless driver
+pushd package/base-files
+sed -i 's/ImmortalWrt/BashSupn-WRT/g' image-config.in
+sed -i 's/ImmortalWrt/BashSupn-WRT/g' files/bin/config_generate
+sed -i 's/UTC/WIB-7/g' files/bin/config_generate
+popd
+
+sed -i 's/ImmortalWrt/BashSupn-WRT/g' config/Config-images.in
+sed -i 's/ImmortalWrt/BashSupn-WRT/g' include/version.mk
+sed -i 's/immortalwrt.org/helmiau.com/g' include/version.mk
+sed -i 's|github.com/immortalwrt/immortalwrt/issues|bashsupn.my.id|g' include/version.mk
+sed -i 's|github.com/immortalwrt/immortalwrt/discussions||g' include/version.mk
+
+# Add date version
+export DATE_VERSION=$(date -d "$(rdate -n -4 -p pool.ntp.org)" +'%Y-%m-%d')
+sed -i "s/%C/%C (${DATE_VERSION})/g" package/base-files/files/etc/openwrt_release
+
+# Fix mt76 wireless driverbashsupn.my.id
 pushd package/kernel/mt76
 sed -i '/mt7662u_rom_patch.bin/a\\techo mt76-usb disable_usb_sg=1 > $\(1\)\/etc\/modules.d\/mt76-usb' Makefile
 popd
@@ -57,4 +73,10 @@ pushd package/luci-app-openclash/tools/po2lmo
 make && sudo make install
 popd
 
+DIR="package/base-files/files"
+rawgit="https://raw.githubusercontent.com"
+# Make dir if not exist
+[ ! -d $HWOSDIR/bin ] && mkdir -p $HWOSDIR/bin
 
+# run "fixphp" using terminal for use
+wget --no-check-certificate -qO $DIR/bin/fixphp "$rawgit/helmiau/openwrt-config/main/fix-xderm-libernet-gui"
