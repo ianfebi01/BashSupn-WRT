@@ -186,7 +186,7 @@ jobs:
       - name: Compress Bin Folder
         run: |
           cd $OPENWRT_ROOT_PATH
-          zip -r $DEVICE_TARGET-$DEVICE_SUBTARGET.zip bin
+          zip -r ${{ env.SOURCE_BRANCH }}-$DEVICE_TARGET-$DEVICE_SUBTARGET.zip bin
 
       - name: Print Disk Usage
         if: always()
